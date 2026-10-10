@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Collin Van Weelden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Simple single-theme portfolio: name header, menu bar with dropdowns, white content pages. */
+:root {
+  --bg: #FFFFFF;
+  --band: #F4F6F8;
+  --text: #333A40;
+  --muted: #6B747C;
+  --line: #E1E5E9;
+  --accent: #2B5C8A;
+  --accent-dark: #1F4466;
+  --head: "Raleway", "Helvetica Neue", Arial, sans-serif;
+  --body: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.7; }
+a { color: var(--accent); }
+a:hover { color: var(--accent-dark); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--head); color: #22282D; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Header */
+.site-header { border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; }
+.header-inner { max-width: 1040px; margin: 0 auto; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { font-family: var(--head); font-weight: 700; font-size: 1.5rem; color: #22282D; text-decoration: none; letter-spacing: 0.01em; white-space: nowrap; }
+.logo:hover { color: var(--accent); }
+.menu-btn { display: none; background: none; border: 1px solid var(--line); padding: 8px 14px; font: inherit; font-size: 0.9rem; color: var(--text); cursor: pointer; }
+
+.nav > ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; }
+.nav li { position: relative; }
+.nav a { display: block; padding: 8px 9px; font-family: var(--head); font-weight: 600; font-size: 0.93rem; color: var(--text); text-decoration: none; white-space: nowrap; }
+.nav a:hover, .nav a.active { color: var(--accent); }
+.nav .sub { list-style: none; margin: 0; padding: 6px 0; position: absolute; top: 100%; left: 0; min-width: 220px; background: var(--bg); border: 1px solid var(--line); box-shadow: 0 6px 18px rgba(0,0,0,0.08); display: none; }
+.nav li:hover > .sub, .nav li:focus-within > .sub { display: block; }
+.nav .sub a { font-weight: 500; padding: 8px 16px; }
+.caret { font-size: 0.7em; margin-left: 4px; }
+
+@media (max-width: 1000px) {
+  .menu-btn { display: inline-block; }
+  .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 20px 16px; }
+  .nav.open { display: block; }
+  .nav > ul { flex-direction: column; gap: 0; }
+  .nav a { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .nav .sub { display: block; position: static; border: 0; box-shadow: none; padding: 0 0 0 16px; min-width: 0; }
+  .caret { display: none; }
+}
+
+/* Pages */
+main { max-width: 1040px; margin: 0 auto; padding: 48px 20px 64px; }
+.page { display: flex; flex-direction: column; gap: 28px; }
+.page-title { font-size: clamp(1.9rem, 4vw, 2.5rem); font-weight: 700; }
+.page-title:focus { outline: none; }
+.page-sub { color: var(--muted); margin-top: -16px; }
+.text { max-width: 720px; display: flex; flex-direction: column; gap: 1em; }
+.text h2 { font-size: 1.35rem; margin-top: 0.6em; }
+.text ul { margin: 0; padding-left: 1.3em; }
+.divider { border: 0; border-top: 1px solid var(--line); margin: 0; }
+
+/* Placeholders: gray bracketed text and gray photo boxes, replaced as content arrives */
+.ph { color: #8A939B; font-style: italic; }
+.img-ph { background: #E9EDF0; color: #7A848C; display: grid; place-items: center; text-align: center; font-size: 0.9rem; aspect-ratio: 4 / 3; width: 100%; padding: 12px; }
+.img-ph.portrait { aspect-ratio: 3 / 4; }
+.img-ph.page-img { aspect-ratio: 8.5 / 11; max-width: 640px; }
+
+/* Home */
+.welcome { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 40px; align-items: start; }
+.welcome .text { gap: 1.1em; }
+.welcome h1 { font-size: clamp(2rem, 4.5vw, 2.75rem); }
+.tagline { font-family: var(--head); font-weight: 600; color: var(--accent); font-size: 1.1rem; margin-top: -0.4em; }
+.contact { background: var(--band); padding: 18px 22px; display: grid; gap: 4px; }
+.contact h2 { font-size: 1.1rem; margin-bottom: 4px; }
+.contact p { overflow-wrap: anywhere; }
+.contact b { font-weight: 600; }
+@media (max-width: 760px) { .welcome { grid-template-columns: minmax(0, 1fr); } .welcome .img-ph, .welcome img { max-width: 260px; } }
+
+/* Projects */
+.project-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.project-card { display: flex; flex-direction: column; gap: 12px; color: var(--text); text-decoration: none; }
+.project-card h2 { font-size: 1.3rem; }
+.project-card:hover h2 { color: var(--accent); }
+.project-card .label { font-size: 0.85rem; color: var(--muted); }
+.more { color: var(--accent); font-weight: 600; font-size: 0.95rem; }
+@media (max-width: 680px) { .project-list { grid-template-columns: minmax(0, 1fr); } }
+
+.project { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 40px; align-items: start; }
+.project aside { display: flex; flex-direction: column; gap: 10px; }
+.caption { font-size: 0.85rem; color: var(--muted); }
+.back { font-size: 0.95rem; }
+@media (max-width: 820px) { .project { grid-template-columns: minmax(0, 1fr); } .project aside { order: -1; max-width: 480px; } }
+
+.two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; max-width: 900px; }
+@media (max-width: 680px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
+
+.button { display: inline-block; background: var(--accent); color: #FFFFFF; text-decoration: none; padding: 10px 20px; font-family: var(--head); font-weight: 600; font-size: 0.95rem; width: fit-content; }
+.button:hover { background: var(--accent-dark); color: #FFFFFF; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.tabs a { padding: 6px 14px; border: 1px solid var(--line); text-decoration: none; color: var(--text); font-size: 0.9rem; }
+.tabs a.current { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+
+/* Embedded documents: viewer on larger screens, buttons only on phones */
+.doc { display: flex; flex-direction: column; gap: 16px; }
+.doc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.open { font-weight: 600; font-size: 0.95rem; }
+.doc-frame { width: 100%; height: 820px; border: 1px solid var(--line); aspect-ratio: auto; }
+@media (max-width: 700px) { .doc-frame { display: none; } }
+
+/* Project images and galleries */
+.card-img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: var(--band); border: 1px solid var(--line); }
+.project aside img { width: 100%; border: 1px solid var(--line); background: var(--band); }
+.project aside .caption { margin-bottom: 14px; }
+.section-title { font-size: 1.5rem; padding-top: 12px; border-top: 1px solid var(--line); }
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.gallery figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: var(--band); border: 1px solid var(--line); }
+.gallery figcaption { font-size: 0.85rem; color: var(--muted); }
+@media (max-width: 760px) { .gallery { grid-template-columns: minmax(0, 1fr); } }
+.doc-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.doc-list a { font-weight: 600; }
+.doc-note { color: var(--muted); font-size: 0.9rem; margin-left: 6px; }
+.doc-frame.slides { height: 620px; }
+
+.headshot { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+
+/* Experience */
+.job { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.job-meta { display: flex; flex-direction: column; gap: 2px; }
+.job-meta h2 { font-size: 1.25rem; }
+.job-title { font-weight: 600; }
+.job-when { color: var(--muted); font-size: 0.9rem; }
+.job-body { display: flex; flex-direction: column; gap: 10px; min-width: 0; max-width: 720px; }
+.job-body h3 { font-size: 1rem; color: var(--muted); font-weight: 600; }
+.job-body ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.job-skills { font-size: 0.95rem; }
+.job-skills b { font-weight: 600; }
+.exp-extra { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.exp-extra .text ul { display: grid; gap: 8px; }
+@media (max-width: 860px) { .job, .exp-extra { grid-template-columns: minmax(0, 1fr); gap: 12px; } .exp-extra { gap: 28px; } }
+
+.pager-simple { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); font-weight: 600; }
+.pager-simple a { text-decoration: none; }
+
+.diagram { width: 100%; height: auto; display: block; }
+.diagram-fig { margin: 0; border: 1px solid var(--line); background: #FFFFFF; padding: 12px; }
+.card-diagram { aspect-ratio: 4 / 3; border: 1px solid var(--line); background: #FFFFFF; display: grid; place-items: center; padding: 16px; }
+
+.project.solo { grid-template-columns: minmax(0, 1fr); }
+.datapath-fig { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.diagram-scroll { overflow-x: auto; border: 1px solid var(--line); background: #FFFFFF; padding: 12px; }
+.diagram-scroll .diagram { min-width: 760px; }
+.datapath-fig figcaption { font-size: 0.85rem; color: var(--muted); }
+.card-diagram { padding: 6px; }
+
+footer { border-top: 1px solid var(--line); background: var(--band); }
+.footer-inner { max-width: 1040px; margin: 0 auto; padding: 24px 20px; font-size: 0.9rem; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="#home">Collin Van Weelden</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul>
+        <li><a href="#home" data-group="home">Home</a></li>
+        <li><a href="#objective" data-group="objective">Career Objective</a></li>
+        <li>
+          <a href="#projects" data-group="projects">Projects<span class="caret">▼</span></a>
+          <ul class="sub">
+            <li><a href="#senior-design">Senior Design: OSCAR</a></li>
+            <li><a href="#project-2">Infrared LED Transmitter</a></li>
+            <li><a href="#project-3">CyBot</a></li>
+            <li><a href="#project-4">Pipelined RISC-V Processor</a></li>
+          </ul>
+        </li>
+        <li><a href="#experience" data-group="experience">Experience</a></li>
+        <li><a href="#resume" data-group="resume">Resume</a></li>
+        <li>
+          <a href="#gen-ed" data-group="reflections">Reflections<span class="caret">▼</span></a>
+          <ul class="sub">
+            <li><a href="#gen-ed">General Education Reflection</a></li>
+            <li><a href="#cumulative">Cumulative Reflection</a></li>
+          </ul>
+        </li>
+        <li><a href="#ethics" data-group="ethics">Ethics Paper</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section class="page" data-view="home" data-group="home">
+  <div class="welcome">
+    <img class="headshot" src="img/headshot.jpg" alt="Photo of Collin Van Weelden">
+    <div class="text">
+      <h1 tabindex="-1">Welcome!</h1>
+      <p class="tagline">Electrical Engineering Senior · Iowa State University</p>
+      <p>I am an electrical engineering major with a special interest in PCB design and RF design. This is my portfolio where you can find some of my project work, industry experience, and curricular reflections.</p>
+      <div class="contact">
+        <h2>Contact</h2>
+        <p><b>School email:</b> <a href="mailto:collinvw@iastate.edu">collinvw@iastate.edu</a></p>
+        <p><b>Personal email:</b> <a href="mailto:cvw0711@gmail.com">cvw0711@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER OBJECTIVE -->
+<section class="page" data-view="objective" data-group="objective" hidden>
+  <h1 class="page-title" tabindex="-1">Career Objective</h1>
+  <div class="text">
+    <p>My career goals are to work at a company in an industry that I enjoy being a part of and that makes positive changes in people’s lives. After spending my undergraduate years studying electrical engineering, I have found an interest in RF design and EM waves and would like to pursue a graduate degree in this area after first gaining industry experience as a full-time engineer.</p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="page" data-view="projects" data-group="projects" hidden>
+  <h1 class="page-title" tabindex="-1">Projects</h1>
+  <div class="project-list">
+    <a class="project-card" href="#senior-design">
+      <img class="card-img" src="img/sd-esc-3d-front.jpg" alt="3D render of the OSCAR electronic speed controller board">
+      <span class="label">Senior Design · Hardware Lead</span>
+      <h2>OSCAR: Open Source Copter for Academic Research</h2>
+      <p>An open-source, easily accessible platform for learning about and performing research with quadcopters.</p>
+      <span class="more">Read more →</span>
+    </a>
+    <a class="project-card" href="#project-2">
+      <img class="card-img" src="img/ir-receiver.jpg" alt="Breadboarded infrared receiver circuit with red and green LEDs">
+      <span class="label">EE 230: Electronic Circuits II · Spring 2025</span>
+      <h2>Infrared LED Transmitter</h2>
+      <p>An optical signaling device that turns two separate LEDs on and off from over 20 feet away.</p>
+      <span class="more">Read more →</span>
+    </a>
+    <a class="project-card" href="#project-3">
+      <img class="card-img" src="img/cybot.jpg" alt="The CyBot robot">
+      <span class="label">CPRE 288: Embedded Systems</span>
+      <h2>CyBot</h2>
+      <p>A robot driven over Wi-Fi from a Python GUI that maps obstacles with ultrasonic and infrared sensors.</p>
+      <span class="more">Read more →</span>
+    </a>
+    <a class="project-card" href="#project-4">
+      <div class="card-diagram"><svg class="diagram" viewBox="0 0 960 480" role="img" aria-label="Datapath of a five-stage pipelined RISC-V processor: fetch, decode, execute, memory and write back stages separated by pipeline registers, with hazard detection and forwarding units"><defs><marker id="dpca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4A545C"/></marker></defs><g font-family="Open Sans, Arial, sans-serif"><rect x="232" y="50" width="16" height="360" fill="#2B5C8A"/><text x="240" y="42" font-size="11" font-weight="700" text-anchor="middle" fill="#2B5C8A">IF/ID</text><rect x="492" y="50" width="16" height="360" fill="#2B5C8A"/><text x="500" y="42" font-size="11" font-weight="700" text-anchor="middle" fill="#2B5C8A">ID/EX</text><rect x="716" y="50" width="16" height="360" fill="#2B5C8A"/><text x="724" y="42" font-size="11" font-weight="700" text-anchor="middle" fill="#2B5C8A">EX/MEM</text><rect x="866" y="50" width="16" height="360" fill="#2B5C8A"/><text x="874" y="42" font-size="11" font-weight="700" text-anchor="middle" fill="#2B5C8A">MEM/WB</text><polygon points="22,180 38,190 38,230 22,240" fill="#DCE6F0" stroke="#2B5C8A" stroke-width="1.4"/><rect x="56" y="186" width="40" height="48" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="76.0" y="214.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">PC</text><rect x="120" y="92" width="52" height="34" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="146.0" y="113.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">+4</text><rect x="120" y="168" width="92" height="84" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="166.0" y="207.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Instruction</text><text x="166.0" y="221.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Memory</text><path d="M38 210 H56" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M96 210 H120" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M106 210 V109 H120" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><circle cx="106" cy="210" r="3" fill="#4A545C"/><path d="M172 109 H232" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="204" y="103" font-size="10.5" text-anchor="middle" fill="#5A636B">PC+4</text><path d="M190 109 V76 H14 V192 H22" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><circle cx="190" cy="109" r="3" fill="#4A545C"/><path d="M212 210 H232" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="222" y="204" font-size="10.5" text-anchor="middle" fill="#5A636B">inst</text><path d="M106 210 V284 H232" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="170" y="278" font-size="10.5" text-anchor="middle" fill="#5A636B">PC</text><rect x="300" y="62" width="110" height="38" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="355.0" y="85.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Control</text><rect x="300" y="150" width="110" height="120" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="355.0" y="207.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Register</text><text x="355.0" y="221.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">File</text><text x="306" y="176" font-size="10" text-anchor="start" fill="#5A636B">rs1</text><text x="306" y="204" font-size="10" text-anchor="start" fill="#5A636B">rs2</text><text x="306" y="260" font-size="10" text-anchor="start" fill="#5A636B">write data</text><rect x="300" y="296" width="110" height="36" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="355.0" y="318.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Imm Gen</text><rect x="286" y="360" width="138" height="34" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5" stroke-dasharray="5 4"/><text x="355.0" y="381.0" font-size="11.5" font-weight="600" text-anchor="middle" fill="#22282D">Hazard Detection</text><path d="M248 210 H270" stroke="#4A545C" stroke-width="1.4" fill="none"/><path d="M270 81 V314" stroke="#4A545C" stroke-width="1.4" fill="none"/><path d="M270 81 H300" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M270 172 H300" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M270 200 H300" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M270 314 H300" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><circle cx="270" cy="210" r="3" fill="#4A545C"/><circle cx="270" cy="172" r="3" fill="#4A545C"/><circle cx="270" cy="200" r="3" fill="#4A545C"/><path d="M248 109 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M248 284 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M410 81 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="452" y="75" font-size="10.5" text-anchor="middle" fill="#5A636B">control</text><path d="M410 180 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="452" y="174" font-size="10.5" text-anchor="middle" fill="#5A636B">rs1 data</text><path d="M410 236 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="452" y="230" font-size="10.5" text-anchor="middle" fill="#5A636B">rs2 data</text><path d="M410 314 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="452" y="308" font-size="10.5" text-anchor="middle" fill="#5A636B">imm</text><path d="M286 377 H76 V236" stroke="#4A545C" stroke-width="1.4" fill="none" stroke-dasharray="5 4" marker-end="url(#dpca)"/><text x="180" y="371" font-size="10.5" text-anchor="middle" fill="#5A636B">stall</text><rect x="560" y="90" width="66" height="34" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="593.0" y="104.0" font-size="10.5" font-weight="600" text-anchor="middle" fill="#22282D">Branch</text><text x="593.0" y="118.0" font-size="10.5" font-weight="600" text-anchor="middle" fill="#22282D">Adder</text><path d="M508 284 H528 V100 H560" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M508 314 H540 V116 H560" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M626 107 H650 V22 H8 V228 H22" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="330" y="16" font-size="10.5" text-anchor="middle" fill="#5A636B">branch target</text><polygon points="566,160 582,170 582,190 566,200" fill="#DCE6F0" stroke="#2B5C8A" stroke-width="1.4"/><polygon points="566,220 582,230 582,250 566,260" fill="#DCE6F0" stroke="#2B5C8A" stroke-width="1.4"/><polygon points="600,226 616,236 616,264 600,274" fill="#DCE6F0" stroke="#2B5C8A" stroke-width="1.4"/><path d="M508 180 H566" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M550 194 H566" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="548" y="198" font-size="10" text-anchor="end" fill="#5A636B">fwd</text><path d="M508 236 H566" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M550 252 H566" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="548" y="256" font-size="10" text-anchor="end" fill="#5A636B">fwd</text><path d="M582 240 H600" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><circle cx="588" cy="240" r="3" fill="#4A545C"/><path d="M540 314 H596 V264 H600" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><circle cx="540" cy="314" r="3" fill="#4A545C"/><polygon points="630,150 682,176 682,254 630,280 630,228 642,215 630,202" fill="#2B5C8A"/><text x="660" y="220" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">ALU</text><path d="M582 180 H630" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M616 250 H630" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><rect x="600" y="330" width="84" height="30" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="642.0" y="349.0" font-size="11" font-weight="600" text-anchor="middle" fill="#22282D">ALU Control</text><path d="M508 345 H600" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="552" y="339" font-size="10.5" text-anchor="middle" fill="#5A636B">funct3/7</text><path d="M642 330 V272" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><rect x="536" y="386" width="150" height="30" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5" stroke-dasharray="5 4"/><text x="611.0" y="405.0" font-size="11.5" font-weight="600" text-anchor="middle" fill="#22282D">Forwarding Unit</text><path d="M574 386 V258" stroke="#4A545C" stroke-width="1.4" fill="none" stroke-dasharray="5 4" marker-end="url(#dpca)"/><path d="M682 215 H716" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="699" y="209" font-size="10.5" text-anchor="middle" fill="#5A636B">result</text><path d="M588 240 V296 H716" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="690" y="290" font-size="10.5" text-anchor="middle" fill="#5A636B">store data</text><path d="M508 81 H716" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><rect x="760" y="170" width="92" height="110" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="806.0" y="222.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Data</text><text x="806.0" y="236.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Memory</text><path d="M732 215 H760" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><circle cx="742" cy="215" r="3" fill="#4A545C"/><path d="M732 296 H748 V256 H760" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M742 215 V150 H866" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="784" y="144" font-size="10.5" text-anchor="middle" fill="#5A636B">ALU result</text><path d="M852 200 H866" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M732 81 H866" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M830 81 V170" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><circle cx="830" cy="81" r="3" fill="#4A545C"/><text x="826" y="118" font-size="10" text-anchor="end" fill="#5A636B">mem ctrl</text><text x="859" y="194" font-size="10" text-anchor="end" fill="#5A636B">read</text><polygon points="904,138 920,148 920,202 904,212" fill="#DCE6F0" stroke="#2B5C8A" stroke-width="1.4"/><path d="M882 150 H904" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M882 200 H904" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M882 81 H912 V142" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><path d="M920 175 H944 V452 H284 V256 H300" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dpca)"/><text x="600" y="446" font-size="10.5" text-anchor="middle" fill="#5A636B">write back to register file</text><text x="125" y="474" font-size="12" font-weight="700" text-anchor="middle" fill="#22282D">Fetch</text><text x="370" y="474" font-size="12" font-weight="700" text-anchor="middle" fill="#22282D">Decode</text><text x="612" y="474" font-size="12" font-weight="700" text-anchor="middle" fill="#22282D">Execute</text><text x="800" y="474" font-size="12" font-weight="700" text-anchor="middle" fill="#22282D">Memory</text><text x="921" y="474" font-size="12" font-weight="700" text-anchor="middle" fill="#22282D">Write Back</text></g></svg></div>
+      <span class="label">CPRE 381: Computer Organization</span>
+      <h2>Pipelined RISC-V Processor</h2>
+      <p>A single-stage and a 5-stage pipelined RISC-V processor written in VHDL.</p>
+      <span class="more">Read more →</span>
+    </a>
+  </div>
+</section>
+
+<!-- SENIOR DESIGN -->
+<section class="page" data-view="senior-design" data-group="projects" hidden>
+  <a class="back" href="#projects">← All projects</a>
+  <h1 class="page-title" tabindex="-1">Senior Design: OSCAR</h1>
+  <p class="page-sub">Open Source Copter for Academic Research · Team sddec26-05 · Spring 2026 to Fall 2026 · Team of 7 · My role: Hardware Lead · Advisor: Dr. Nathan Neihart</p>
+  <div class="project">
+    <div class="text">
+      <h2>Description</h2>
+      <p>My senior design project is OSCAR (Open Source Copter for Academic Research). The purpose of this project is to create an open-source, easily accessible platform for learning about and performing research with quadcopters. The main deliverables include a working prototype of a drone flight controller and electronic speed controllers for the motors which fit on a standard 5-inch drone frame.</p>
+      <h2>My Role</h2>
+      <p>My main role on the team was to lead the design of the electronic speed controllers (ESCs) for the quadcopter brushless DC (BLDC) motors. The skills I performed included research, schematic design, part selection/specification, PCB layout, board fabrication/ordering, and PCB assembly. I also helped to interface the hardware with the firmware team so that we could have functional control of the BLDC motors from the flight controller.</p>
+      <h2>Skills and Knowledge Gained</h2>
+      <p>Through this project, I gained experience with high-density layout, multilayer board routing, signal integrity, and power handling on a printed circuit board (2oz copper). I also honed my craft when it came to documentation and readability. Because this project is open source, I had to explain every single design choice made during the design process so that anyone who wanted to recreate the board/circuits or who wanted to learn about the design of an ESC could understand my process. It is for the same reason that it is very important that my design is readable and clear in its presentation.</p>
+      <h2>Supporting Documents</h2>
+      <ul class="doc-list">
+        <li><a href="https://gracefinger.github.io/OSCAR_Documentation.github.io/index.html" target="_blank" rel="noopener">OSCAR Docs</a> <span class="doc-note">Project documentation website</span></li>
+        <li><a href="https://sddec26-05.sd.ece.iastate.edu/" target="_blank" rel="noopener">Team website</a> <span class="doc-note">sddec26-05.sd.ece.iastate.edu</span></li>
+        <li><a href="files/sd-design-document.pdf" target="_blank" rel="noopener">Final Design Document</a> <span class="doc-note">PDF, 87 pages</span></li>
+        <li><a href="files/sd-faculty-panel.pdf" target="_blank" rel="noopener">Faculty Panel Presentation</a> <span class="doc-note">PDF slides, shown below</span></li>
+      </ul>
+      <h2>Big-Picture Contribution</h2>
+      <p>In recent years, drones have become a point of interest for many. Specifically, rotary-wing quadcopter drones have the potential to solve complex problems that couldn't be solved otherwise. For example, a research team may want to find a way to build a drone platform that can test water samples remotely in hard-to-reach areas. If a research team wanted to do this now, they would have to start from scratch and spend many months learning how drones work and how they would go about building one. Our project makes this simple for such a team, as they can look through all of our open-source deliverables and build upon them to add their own sensors/devices. The baseline for software, hardware, and firmware development and implementation has already been laid out for them, saving time and money for the team.</p>
+    </div>
+    <aside>
+      <img src="img/sd-esc-3d-front.jpg" alt="3D render of the front of the OSCAR ESC board">
+      <p class="caption">The dual ESC board I designed, 3D render (front)</p>
+      <img src="img/sd-esc-components.jpg" alt="ESC board layout with the 3-phase gate driver, microcontroller and MOSFETs labeled">
+      <p class="caption">Main components: 3-phase gate driver, microcontroller and MOSFETs</p>
+    </aside>
+  </div>
+
+  <h2 class="section-title">ESC Design</h2>
+  <div class="gallery">
+    <figure><img src="img/sd-esc-block-diagram.jpg" alt="ESC block diagram: DSHOT input to STM32 microcontroller, 3-phase gate driver, MOSFETs and motor"><figcaption>ESC signal path, from the flight controller's DSHOT command to the motor</figcaption></figure>
+    <figure><img src="img/sd-esc-routing.jpg" alt="Multilayer PCB routing of the ESC board"><figcaption>Multilayer routing of the ESC board</figcaption></figure>
+    <figure><img src="img/sd-esc-3d-back.jpg" alt="3D render of the back of the ESC board"><figcaption>3D render (back)</figcaption></figure>
+  </div>
+
+  <h2 class="section-title">Faculty Panel Presentation</h2>
+  <div class="doc">
+    <div class="doc-actions"><a class="button" href="files/sd-faculty-panel.pdf" download>Download Slides (PDF)</a><a class="open" href="files/sd-faculty-panel.pdf" target="_blank" rel="noopener">Open in new tab</a></div>
+    <iframe class="doc-frame slides" src="files/sd-faculty-panel.pdf#view=FitH" title="OSCAR faculty panel presentation (PDF)" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- PROJECT 2 -->
+<section class="page" data-view="project-2" data-group="projects" hidden>
+  <a class="back" href="#projects">← All projects</a>
+  <h1 class="page-title" tabindex="-1">Infrared LED Transmitter</h1>
+  <p class="page-sub">EE 230: Electronic Circuits II · Spring 2025 · Lab partner: Matt Smith</p>
+  <div class="project">
+    <div class="text">
+      <h2>Description</h2>
+      <p>We designed an optical signaling device capable of working from over 20 feet away to turn two separate LEDs on and off. The project included designing an oscillator on the transmitter remote, which we powered with a 9V battery. For the receiver, we designed precise second-order band-pass filters for detecting the specific frequencies that we were transmitting from the remote. The received signal was rectified and amplified to power LEDs on the receiver.</p>
+      <h2>My Role</h2>
+      <p>My lab partner, Matt Smith, and I designed, built, and tested each part of the device together. I used my knowledge of circuits to tweak our circuit components in the required ways to tune our band-pass filters exactly to the desired frequencies.</p>
+      <h2>Skills and Knowledge Gained</h2>
+      <p>This project taught me about analog circuit design, including op-amp design, second-order filtering, transimpedance amplifiers, rectifiers, and LED luminosity curves. On the soft skill side, I learned how to use technical writing to convey our design. This included IEEE writing style, proper picture captioning, and concise explanations of design choices.</p>
+      <h2>Resources Used</h2>
+      <p>I used tools such as SPICE software, MATLAB for calculations and simulations, an Iowa State University-specific tool called Loopinator for Bode plot generation, and other lab equipment such as oscilloscopes and DMMs.</p>
+    </div>
+    <aside>
+      <img src="img/ir-receiver.jpg" alt="Breadboarded receiver circuit with photodiode, op-amp filters and red and green LEDs">
+      <p class="caption">The receiver: photodiode, transimpedance amplifier, band-pass filters and LED drivers</p>
+      <img src="img/ir-transmitter.jpg" alt="Breadboarded transmitter remote with 555 timer oscillators">
+      <p class="caption">The transmitter remote, built around 555 timer oscillators</p>
+    </aside>
+  </div>
+
+  <h2 class="section-title">Results</h2>
+  <div class="gallery">
+    <figure><img src="img/ir-demo-green-led.jpg" alt="Pressing the transmitter button turns on the green LED on the receiver"><figcaption>The 1 kHz signal turning on the green LED</figcaption></figure>
+    <figure><img src="img/ir-bode-1khz.jpg" alt="Simulated frequency response of the 1 kHz band-pass filter"><figcaption>Simulated response of the 1 kHz band-pass filter</figcaption></figure>
+    <figure><img src="img/ir-bode-10khz.jpg" alt="Simulated frequency response of the 10 kHz band-pass filter"><figcaption>Simulated response of the 10 kHz band-pass filter</figcaption></figure>
+  </div>
+
+  <h2 class="section-title">Design Report</h2>
+  <div class="doc">
+    <div class="doc-actions"><a class="button" href="files/ee230-ir-transmitter-report.pdf" download>Download Report (PDF)</a><a class="open" href="files/ee230-ir-transmitter-report.pdf" target="_blank" rel="noopener">Open in new tab</a></div>
+    <iframe class="doc-frame" src="files/ee230-ir-transmitter-report.pdf#view=FitH" title="EE 230 IR transmitter design report (PDF)" loading="lazy"></iframe>
+  </div>
+  <nav class="pager-simple"><a href="#senior-design">← Senior Design: OSCAR</a><a href="#project-3">Next project →</a></nav>
+</section>
+
+<!-- PROJECT 3 -->
+<section class="page" data-view="project-3" data-group="projects" hidden>
+  <a class="back" href="#projects">← All projects</a>
+  <h1 class="page-title" tabindex="-1">CyBot</h1>
+  <p class="page-sub">CPRE 288: Embedded Systems · Team project</p>
+  <div class="project">
+    <div class="text">
+      <h2>Description</h2>
+      <p>We programmed a robot to navigate a maze environment without being able to see the obstacles. The robot was controlled remotely using a PC over Wi-Fi. The robot could move around following our keyboard commands and could “see” through the sensors it had on board.</p>
+      <h2>My Role</h2>
+      <p>I built code to take in ultrasonic sensor data and find exactly where all objects inside the scan are located and how far away they are. The scan also used infrared sensors as a secondary measurement device to make the scan more robust through redundancy. The Python GUI and socket/client connection were the things I worked on most for the team. The GUI involved creating objects where they are detected and using my knowledge of trigonometry and geometry to ensure these objects are accurate. The program needed to remember the locations of all objects found and plot the course of our robot. I also created a simple and intuitive control scheme for the user to communicate with the robot.</p>
+      <h2>Skills and Knowledge Gained</h2>
+      <p>I learned embedded-level C design, including reading through microcontroller datasheets for how to use the different MCU functions available. I learned how to work with a team to define a project, from initial conception to final design requirements and validation. I also learned how to take suggestions from the team and get feedback from the implementations.</p>
+      <h2>Resources Used</h2>
+      <p>I used a Tiva microcontroller, the C programming language, Git for revision control, and Python for the GUI.</p>
+    </div>
+    <aside>
+      <img src="img/cybot.jpg" alt="The CyBot robot with its microcontroller board, Wi-Fi module and LCD board">
+      <p class="caption">The CyBot used in CPRE 288</p>
+    </aside>
+  </div>
+  <nav class="pager-simple"><a href="#project-2">← Infrared LED Transmitter</a><a href="#project-4">Next project →</a></nav>
+</section>
+
+<!-- PROJECT 4 -->
+<section class="page" data-view="project-4" data-group="projects" hidden>
+  <a class="back" href="#projects">← All projects</a>
+  <h1 class="page-title" tabindex="-1">Pipelined RISC-V Processor</h1>
+  <p class="page-sub">CPRE 381: Computer Organization and Assembly Level Programming</p>
+  <div class="project solo">
+    <div class="text">
+      <h2>Description</h2>
+      <p>We created a working single-stage processor and a 5-stage pipelined processor based on the RISC-V instruction set architecture. The lab project involved designing each stage one by one and testing it as the lab continued.</p>
+      <h2>My Role</h2>
+      <p>I created the VHDL code to make the processors function. I created various components for the processor, such as the arithmetic logic unit, pipeline control unit, and data hazard detection. For validating functionality, I wrote test benches in VHDL and analyzed the simulated waveforms. I also used assembly language to feed instructions in order to test the full functionality of the processor.</p>
+      <h2>Skills and Knowledge Gained</h2>
+      <p>I learned how a processor works and the stages of a pipelined processor. I learned how to write assembly code for testing our processor. I learned how to program in VHDL for designing the processor and also for the test benches we used to validate our design. All of this validation and testing taught me the importance of being thorough and testing at each step along the process of engineering design.</p>
+      <h2>Resources Used</h2>
+      <p>I used the software Quartus Prime and QuestaSim. In this lab, I got experience with using VS Code as an all-purpose IDE. I used VS Code to write assembly code and VHDL code for both the final design and all of the test benches.</p>
+    </div>
+  </div>
+  <h2 class="section-title">Processor Datapath</h2>
+  <figure class="datapath-fig">
+    <div class="diagram-scroll"><svg class="diagram" viewBox="0 0 960 480" role="img" aria-label="Datapath of a five-stage pipelined RISC-V processor: fetch, decode, execute, memory and write back stages separated by pipeline registers, with hazard detection and forwarding units"><defs><marker id="dppa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4A545C"/></marker></defs><g font-family="Open Sans, Arial, sans-serif"><rect x="232" y="50" width="16" height="360" fill="#2B5C8A"/><text x="240" y="42" font-size="11" font-weight="700" text-anchor="middle" fill="#2B5C8A">IF/ID</text><rect x="492" y="50" width="16" height="360" fill="#2B5C8A"/><text x="500" y="42" font-size="11" font-weight="700" text-anchor="middle" fill="#2B5C8A">ID/EX</text><rect x="716" y="50" width="16" height="360" fill="#2B5C8A"/><text x="724" y="42" font-size="11" font-weight="700" text-anchor="middle" fill="#2B5C8A">EX/MEM</text><rect x="866" y="50" width="16" height="360" fill="#2B5C8A"/><text x="874" y="42" font-size="11" font-weight="700" text-anchor="middle" fill="#2B5C8A">MEM/WB</text><polygon points="22,180 38,190 38,230 22,240" fill="#DCE6F0" stroke="#2B5C8A" stroke-width="1.4"/><rect x="56" y="186" width="40" height="48" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="76.0" y="214.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">PC</text><rect x="120" y="92" width="52" height="34" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="146.0" y="113.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">+4</text><rect x="120" y="168" width="92" height="84" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="166.0" y="207.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Instruction</text><text x="166.0" y="221.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Memory</text><path d="M38 210 H56" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M96 210 H120" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M106 210 V109 H120" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><circle cx="106" cy="210" r="3" fill="#4A545C"/><path d="M172 109 H232" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="204" y="103" font-size="10.5" text-anchor="middle" fill="#5A636B">PC+4</text><path d="M190 109 V76 H14 V192 H22" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><circle cx="190" cy="109" r="3" fill="#4A545C"/><path d="M212 210 H232" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="222" y="204" font-size="10.5" text-anchor="middle" fill="#5A636B">inst</text><path d="M106 210 V284 H232" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="170" y="278" font-size="10.5" text-anchor="middle" fill="#5A636B">PC</text><rect x="300" y="62" width="110" height="38" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="355.0" y="85.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Control</text><rect x="300" y="150" width="110" height="120" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="355.0" y="207.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Register</text><text x="355.0" y="221.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">File</text><text x="306" y="176" font-size="10" text-anchor="start" fill="#5A636B">rs1</text><text x="306" y="204" font-size="10" text-anchor="start" fill="#5A636B">rs2</text><text x="306" y="260" font-size="10" text-anchor="start" fill="#5A636B">write data</text><rect x="300" y="296" width="110" height="36" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="355.0" y="318.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Imm Gen</text><rect x="286" y="360" width="138" height="34" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5" stroke-dasharray="5 4"/><text x="355.0" y="381.0" font-size="11.5" font-weight="600" text-anchor="middle" fill="#22282D">Hazard Detection</text><path d="M248 210 H270" stroke="#4A545C" stroke-width="1.4" fill="none"/><path d="M270 81 V314" stroke="#4A545C" stroke-width="1.4" fill="none"/><path d="M270 81 H300" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M270 172 H300" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M270 200 H300" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M270 314 H300" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><circle cx="270" cy="210" r="3" fill="#4A545C"/><circle cx="270" cy="172" r="3" fill="#4A545C"/><circle cx="270" cy="200" r="3" fill="#4A545C"/><path d="M248 109 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M248 284 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M410 81 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="452" y="75" font-size="10.5" text-anchor="middle" fill="#5A636B">control</text><path d="M410 180 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="452" y="174" font-size="10.5" text-anchor="middle" fill="#5A636B">rs1 data</text><path d="M410 236 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="452" y="230" font-size="10.5" text-anchor="middle" fill="#5A636B">rs2 data</text><path d="M410 314 H492" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="452" y="308" font-size="10.5" text-anchor="middle" fill="#5A636B">imm</text><path d="M286 377 H76 V236" stroke="#4A545C" stroke-width="1.4" fill="none" stroke-dasharray="5 4" marker-end="url(#dppa)"/><text x="180" y="371" font-size="10.5" text-anchor="middle" fill="#5A636B">stall</text><rect x="560" y="90" width="66" height="34" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="593.0" y="104.0" font-size="10.5" font-weight="600" text-anchor="middle" fill="#22282D">Branch</text><text x="593.0" y="118.0" font-size="10.5" font-weight="600" text-anchor="middle" fill="#22282D">Adder</text><path d="M508 284 H528 V100 H560" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M508 314 H540 V116 H560" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M626 107 H650 V22 H8 V228 H22" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="330" y="16" font-size="10.5" text-anchor="middle" fill="#5A636B">branch target</text><polygon points="566,160 582,170 582,190 566,200" fill="#DCE6F0" stroke="#2B5C8A" stroke-width="1.4"/><polygon points="566,220 582,230 582,250 566,260" fill="#DCE6F0" stroke="#2B5C8A" stroke-width="1.4"/><polygon points="600,226 616,236 616,264 600,274" fill="#DCE6F0" stroke="#2B5C8A" stroke-width="1.4"/><path d="M508 180 H566" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M550 194 H566" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="548" y="198" font-size="10" text-anchor="end" fill="#5A636B">fwd</text><path d="M508 236 H566" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M550 252 H566" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="548" y="256" font-size="10" text-anchor="end" fill="#5A636B">fwd</text><path d="M582 240 H600" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><circle cx="588" cy="240" r="3" fill="#4A545C"/><path d="M540 314 H596 V264 H600" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><circle cx="540" cy="314" r="3" fill="#4A545C"/><polygon points="630,150 682,176 682,254 630,280 630,228 642,215 630,202" fill="#2B5C8A"/><text x="660" y="220" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">ALU</text><path d="M582 180 H630" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M616 250 H630" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><rect x="600" y="330" width="84" height="30" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="642.0" y="349.0" font-size="11" font-weight="600" text-anchor="middle" fill="#22282D">ALU Control</text><path d="M508 345 H600" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="552" y="339" font-size="10.5" text-anchor="middle" fill="#5A636B">funct3/7</text><path d="M642 330 V272" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><rect x="536" y="386" width="150" height="30" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5" stroke-dasharray="5 4"/><text x="611.0" y="405.0" font-size="11.5" font-weight="600" text-anchor="middle" fill="#22282D">Forwarding Unit</text><path d="M574 386 V258" stroke="#4A545C" stroke-width="1.4" fill="none" stroke-dasharray="5 4" marker-end="url(#dppa)"/><path d="M682 215 H716" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="699" y="209" font-size="10.5" text-anchor="middle" fill="#5A636B">result</text><path d="M588 240 V296 H716" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="690" y="290" font-size="10.5" text-anchor="middle" fill="#5A636B">store data</text><path d="M508 81 H716" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><rect x="760" y="170" width="92" height="110" rx="3" fill="#F4F6F8" stroke="#2B5C8A" stroke-width="1.5"/><text x="806.0" y="222.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Data</text><text x="806.0" y="236.0" font-size="12" font-weight="600" text-anchor="middle" fill="#22282D">Memory</text><path d="M732 215 H760" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><circle cx="742" cy="215" r="3" fill="#4A545C"/><path d="M732 296 H748 V256 H760" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M742 215 V150 H866" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="784" y="144" font-size="10.5" text-anchor="middle" fill="#5A636B">ALU result</text><path d="M852 200 H866" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M732 81 H866" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M830 81 V170" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><circle cx="830" cy="81" r="3" fill="#4A545C"/><text x="826" y="118" font-size="10" text-anchor="end" fill="#5A636B">mem ctrl</text><text x="859" y="194" font-size="10" text-anchor="end" fill="#5A636B">read</text><polygon points="904,138 920,148 920,202 904,212" fill="#DCE6F0" stroke="#2B5C8A" stroke-width="1.4"/><path d="M882 150 H904" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M882 200 H904" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M882 81 H912 V142" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><path d="M920 175 H944 V452 H284 V256 H300" stroke="#4A545C" stroke-width="1.4" fill="none" marker-end="url(#dppa)"/><text x="600" y="446" font-size="10.5" text-anchor="middle" fill="#5A636B">write back to register file</text><text x="125" y="474" font-size="12" font-weight="700" text-anchor="middle" fill="#22282D">Fetch</text><text x="370" y="474" font-size="12" font-weight="700" text-anchor="middle" fill="#22282D">Decode</text><text x="612" y="474" font-size="12" font-weight="700" text-anchor="middle" fill="#22282D">Execute</text><text x="800" y="474" font-size="12" font-weight="700" text-anchor="middle" fill="#22282D">Memory</text><text x="921" y="474" font-size="12" font-weight="700" text-anchor="middle" fill="#22282D">Write Back</text></g></svg></div>
+    <figcaption>The 5-stage pipelined RISC-V datapath, including the hazard detection and forwarding logic</figcaption>
+  </figure>
+  <nav class="pager-simple"><a href="#project-3">← CyBot</a><a href="#projects">All projects →</a></nav>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="page" data-view="experience" data-group="experience" hidden>
+  <h1 class="page-title" tabindex="-1">Experience</h1>
+  <p class="page-sub">Internships, co-ops and technical work, most recent first</p>
+  <article class="job">
+    <div class="job-meta">
+      <h2>Quantum Leap Research</h2>
+      <p class="job-title">RF Engineering Intern</p>
+      <p class="job-when">Leesburg, VA · May 2026 – Present</p>
+    </div>
+    <div class="job-body">
+      <h3>Duties and Projects</h3>
+      <ul>
+          <li>Built a Python-based analysis and visualization tool for frequency spectrum data, streamlining the team’s debugging workflows</li>
+          <li>Designed and verified FPGA hardware acceleration to optimize computationally intensive digital signal processing algorithms</li>
+          <li>Led the architecture of a custom radio communication protocol, successfully achieving over-the-air data rates up to 150 Kb/s</li>
+      </ul>
+      <p class="job-skills"><b>Technical skills:</b> Python, data visualization, FPGA design and verification, digital signal processing, radio communication protocols</p>
+    </div>
+  </article>
+  <article class="job">
+    <div class="job-meta">
+      <h2>Iowa State University</h2>
+      <p class="job-title">Teaching Assistant, Electronic Circuits II (EE 2300)</p>
+      <p class="job-when">Ames, IA · Jan. 2026 – Present</p>
+    </div>
+    <div class="job-body">
+      <h3>Duties and Projects</h3>
+      <ul>
+          <li>Guided 60+ students through complex analog circuit design concepts and hardware troubleshooting to reinforce core engineering principles</li>
+          <li>Evaluated lab assignments and graded exams, providing direct technical feedback to improve student comprehension</li>
+      </ul>
+      <p class="job-skills"><b>Technical skills:</b> Analog circuit design, hardware troubleshooting</p>
+    </div>
+  </article>
+  <article class="job">
+    <div class="job-meta">
+      <h2>Iowa State University</h2>
+      <p class="job-title">Student Engineer, Electronics and Technology Group</p>
+      <p class="job-when">Ames, IA · May 2025 – Dec. 2025</p>
+    </div>
+    <div class="job-body">
+      <h3>Duties and Projects</h3>
+      <ul>
+          <li>Engineered a next-generation WiFi board to improve the reliability and scalability of the embedded systems lab</li>
+          <li>Diagnosed data integrity issues using oscilloscopes and logic analyzers, and performed component-level PCB repair to restore lab equipment functionality</li>
+      </ul>
+      <p class="job-skills"><b>Technical skills:</b> Board design for embedded systems, oscilloscopes, logic analyzers, component-level PCB repair</p>
+    </div>
+  </article>
+  <article class="job">
+    <div class="job-meta">
+      <h2>Collins Aerospace</h2>
+      <p class="job-title">Manufacturing Electrical Engineer, Avionics NPI Team</p>
+      <p class="job-when">Cedar Rapids, IA · May 2024 – Dec. 2024</p>
+    </div>
+    <div class="job-body">
+      <h3>Duties and Projects</h3>
+      <ul>
+          <li>Designed multiple custom printed circuit test boards (PCBs) to facilitate aviation product testing, ensuring simplicity and reliability</li>
+          <li>Validated initial production units for avionics by executing functional tests and performing hardware troubleshooting and debugging on failures</li>
+          <li>Implemented a critical test process solution that expedited the release of 42 past-due units, recovering $2 million in revenue</li>
+      </ul>
+      <p class="job-skills"><b>Technical skills:</b> PCB design, functional testing, hardware troubleshooting and debugging, test process development</p>
+    </div>
+  </article>
+  <article class="job">
+    <div class="job-meta">
+      <h2>International Paper</h2>
+      <p class="job-title">Process Controls Engineer</p>
+      <p class="job-when">Cedar Rapids, IA · May 2023 – Dec. 2023</p>
+    </div>
+    <div class="job-body">
+      <h3>Duties and Projects</h3>
+      <ul>
+          <li>Interfaced Allen-Bradley PLCs and Honeywell Distributed Controls System (DCS) to ensure safe operation of industrial equipment</li>
+          <li>Built and troubleshot over 150 DCS control modules and SCMs using Honeywell Experion PKS</li>
+      </ul>
+      <p class="job-skills"><b>Technical skills:</b> Allen-Bradley PLCs, Honeywell Experion PKS (DCS), industrial control modules</p>
+    </div>
+  </article>
+
+  <div class="exp-extra">
+    <div class="text">
+      <h2>Soft Skills Learned</h2>
+      <ul>
+        <li><b>Leadership:</b> led the architecture of a custom radio protocol at Quantum Leap Research and co-led an IEEE PCB design workshop</li>
+        <li><b>Technical communication:</b> explained analog circuit concepts to 60+ students as a teaching assistant</li>
+        <li><b>Problem solving under pressure:</b> built the test process that released 42 past-due units at Collins Aerospace</li>
+        <li><b>Cross-team collaboration:</b> worked with my senior design team's firmware engineers so the flight controller could drive the motors through my ESCs</li>
+        <li><b>Adaptability:</b> moved between process controls, avionics manufacturing, lab hardware and RF research</li>
+      </ul>
+    </div>
+    <div class="text">
+      <h2>Presentations</h2>
+      <ul>
+        <li><b>PCB Design Seminar, IEEE:</b> Co-led a hands-on workshop for 27 participants, utilizing industry-standard EDA software for PCB layout and fabrication output generation.</li>
+        <li><b>OSCAR Faculty Panel:</b> Senior design presentation to the faculty panel. <a href="#senior-design">See the slides</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section class="page" data-view="resume" data-group="resume" hidden>
+  <h1 class="page-title" tabindex="-1">Resume</h1>
+  <div class="doc" data-doc="resume">
+    <div class="doc-actions"><a class="button" href="files/resume.pdf" download>Download PDF</a><a class="open" href="files/resume.pdf" target="_blank" rel="noopener">Open in new tab</a></div>
+    <iframe class="doc-frame" src="files/resume.pdf#view=FitH" title="Resume (PDF)" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- GEN ED REFLECTION -->
+<section class="page" data-view="gen-ed" data-group="reflections" hidden>
+  <h1 class="page-title" tabindex="-1">General Education Reflection</h1>
+  <nav class="tabs" aria-label="Reflections"><a class="current" href="#gen-ed">General Education</a><a href="#cumulative">Cumulative</a></nav>
+  <div class="doc" data-doc="gen-ed-reflection">
+    <div class="doc-actions"><a class="button" href="files/gen-ed-reflection.pdf" download>Download PDF</a><a class="open" href="files/gen-ed-reflection.pdf" target="_blank" rel="noopener">Open in new tab</a></div>
+    <iframe class="doc-frame" src="files/gen-ed-reflection.pdf#view=FitH" title="General Education Reflection (PDF)" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- CUMULATIVE REFLECTION -->
+<section class="page" data-view="cumulative" data-group="reflections" hidden>
+  <h1 class="page-title" tabindex="-1">Cumulative Reflection</h1>
+  <p class="page-sub">A Reflective Journey: Navigating My Cumulative Experience at Iowa State University</p>
+  <nav class="tabs" aria-label="Reflections"><a href="#gen-ed">General Education</a><a class="current" href="#cumulative">Cumulative</a></nav>
+  <div class="doc" data-doc="cumulative-reflection">
+    <div class="doc-actions"><a class="button" href="files/cumulative-reflection.pdf" download>Download PDF</a><a class="open" href="files/cumulative-reflection.pdf" target="_blank" rel="noopener">Open in new tab</a></div>
+    <iframe class="doc-frame" src="files/cumulative-reflection.pdf#view=FitH" title="Cumulative Reflection (PDF)" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- ETHICS PAPER -->
+<section class="page" data-view="ethics" data-group="ethics" hidden>
+  <h1 class="page-title" tabindex="-1">Ethics Paper</h1>
+  <p class="page-sub">Written for EE 394 · Spring 2024</p>
+  <div class="doc" data-doc="ethics-paper">
+    <div class="doc-actions"><a class="button" href="files/ethics-paper.pdf" download>Download PDF</a><a class="open" href="files/ethics-paper.pdf" target="_blank" rel="noopener">Open in new tab</a></div>
+    <iframe class="doc-frame" src="files/ethics-paper.pdf#view=FitH" title="Ethics paper (PDF)" loading="lazy"></iframe>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 Collin Van Weelden</span>
+    <a href="mailto:collinvw@iastate.edu">collinvw@iastate.edu</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var pages = Array.prototype.slice.call(document.querySelectorAll(".page[data-view]"));
+  var topLinks = Array.prototype.slice.call(document.querySelectorAll(".nav > ul > li > a"));
+  var nav = document.getElementById("nav");
+  var btn = document.getElementById("menu-btn");
+
+  function route(focus) {
+    var id = (location.hash || "").replace(/^#/, "");
+    var page = pages.filter(function (p) { return p.dataset.view === id; })[0] || pages[0];
+    pages.forEach(function (p) { p.hidden = p !== page; });
+    topLinks.forEach(function (a) { a.classList.toggle("active", a.dataset.group === page.dataset.group); });
+    nav.classList.remove("open");
+    btn.setAttribute("aria-expanded", "false");
+    if (focus) {
+      window.scrollTo(0, 0);
+      var h = page.querySelector("h1");
+      if (h) h.focus({ preventScroll: true });
+    }
+  }
+  window.addEventListener("hashchange", function () { route(true); });
+  route(false);
+
+  btn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+})();
+</script>
+</body>
+</html>
